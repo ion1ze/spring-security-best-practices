@@ -4,6 +4,6 @@
 
 ## 最佳实践
 
-* [使用JSON传递登录参数](./practices/) 
+* [使用JSON传递登录参数](./practices/spring-security-json-login) 
 * 
 
