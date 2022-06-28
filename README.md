@@ -5,5 +5,5 @@
 ## 最佳实践
 
 * [使用JSON传递登录参数](./practices/spring-security-json-login) 
-* [集成多用户表](./practices/spring-security-multi-user-detail-service)
+* [集成多类型用户体系](./practices/spring-security-multi-user-detail-service)
 
