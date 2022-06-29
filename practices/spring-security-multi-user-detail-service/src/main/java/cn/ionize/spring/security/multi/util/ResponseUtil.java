@@ -15,7 +15,8 @@ import java.io.PrintWriter;
 public class ResponseUtil {
 
     public static void toJson(HttpServletResponse response, Result<Object> result) throws IOException {
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        // 需要使用 APPLICATION_JSON_UTF8_VALUE 不然会导致乱码
+        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         PrintWriter out = response.getWriter();
         String resultString = new ObjectMapper().writeValueAsString(result);
         out.write(resultString);

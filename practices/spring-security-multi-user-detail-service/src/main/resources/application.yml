@@ -1,0 +1,25 @@
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:~/test/test_db;AUTO_SERVER=TRUE
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    generate-ddl: false
+    show-sql: true
+  sql:
+    init:
+      continue-on-error: false
+      encoding: UTF-8
+      mode: always
+      schema-locations:
+        - classpath:db/schema.sql
+      data-locations:
+        - classpath:db/data.sql
