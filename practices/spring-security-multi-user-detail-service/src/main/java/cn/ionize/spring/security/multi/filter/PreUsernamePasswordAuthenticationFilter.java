@@ -4,12 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import org.springframework.http.MediaType;
 import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,16 +20,17 @@ import java.util.Map;
  * @author zhiheng.wang
  * @version 1.0.0
  */
-public class PreUsernamePasswordAuthenticationFilter extends GenericFilterBean {
+public class PreUsernamePasswordAuthenticationFilter extends OncePerRequestFilter {
 
     private static final String DEFAULT_USERNAME_PARAMETER = "username";
     private static final String DEFAULT_PASSWORD_PARAMETER = "password";
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String contentType = request.getContentType();
-        ParameterRequestWrapper parameterRequestWrapper = new ParameterRequestWrapper((HttpServletRequest) request);
+        ParameterRequestWrapper parameterRequestWrapper = new ParameterRequestWrapper(request);
 
         if (MediaType.APPLICATION_JSON_VALUE.equals(contentType) || MediaType.APPLICATION_JSON_UTF8_VALUE.equals(contentType)) {
             MapType mapType = objectMapper.getTypeFactory().constructMapType(HashMap.class, String.class, String.class);
